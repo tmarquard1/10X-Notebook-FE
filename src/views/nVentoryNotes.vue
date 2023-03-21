@@ -14,6 +14,7 @@
             <div v-html="markdownToHtml" class="info"></div>
         </div>
     </div>
+    <button @click="addNote">Save</button>
 </template>
 
 
