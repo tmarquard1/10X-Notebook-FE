@@ -22,7 +22,7 @@
           content: this.content
         };
         
-        axios.post('https://tiffanyclark225-miniature-goldfish-wjjprqq7gjq37pw-9000.preview.app.github.dev/note/add', data)
+        axios.post('http://localhost:9000/note/add', data)
           .then(response => {
             console.log(response);
           })
