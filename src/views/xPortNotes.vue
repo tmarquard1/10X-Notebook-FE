@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row mt-4">
-            <h1>XPORT NOTES</h1>
+            <h1>NPORT NOTES</h1>
         </div>
     </div>
     <div class="row mt-4">
@@ -15,7 +15,6 @@
         </div>
     </div>
     <button @click="addNote">Save</button>
-    
 </template>
 
 

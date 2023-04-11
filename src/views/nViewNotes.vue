@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row mt-4">
-            <h1>NVIEW NOTES</h1>
+            <h1>NPORT NOTES</h1>
         </div>
     </div>
     <div class="row mt-4">
@@ -16,6 +16,7 @@
     </div>
     <button @click="addNote">Save</button>
 </template>
+
 
 <script>
 import {marked} from 'marked';
