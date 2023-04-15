@@ -1,71 +1,39 @@
 <template>
-    <div class="container">
-        <div class="row mt-4">
-            <h1>NPORT NOTES</h1>
-        </div>
-    </div>
+  <div class="container">
     <div class="row mt-4">
-        <div class="col-md-6">
-            <h4>Markdown</h4>
-            <textarea v-model="markdown" class="info"></textarea>
-        </div>
-        <div class="col-md-6">
-            <h4>Formatted Text</h4>
-            <div v-html="markdownToHtml" class="info"></div>
-        </div>
+      <h1>ALL NOTES</h1>
     </div>
-    <button @click="addNote">Save</button>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <button @click="getNotes">Load Notes</button>
+      <div v-for="note in notes" :key="note.id">
+        <h5>{{ note.id }}. {{ note.title }}. {{ note.tags }}. {{ note.content }}</h5>
+      </div>
+    </div>
+  </div>
 </template>
 
-
 <script>
-import {marked} from 'marked';
-
+import axios from 'axios'
 export default {
-name: 'App',
-components: {
-},
-data() {
+  name: 'xPort',
+  data() {
     return {
-    markdown: 'Enter Markdown Here...',
-    };
-},
-computed: {
-    markdownToHtml() {
-    return marked(this.markdown);
+      notes: [],
     }
+  },
+  methods: {
+    getNotes() {
+      axios.get('http://localhost:9000/notes/')
+        .then((response) => {
+          console.log(response.data)
+          this.notes = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+  },
 }
-
-}
-
 </script>
-
-<style scoped>
-.container {
-    margin-top: 40px;
-}
-.textarea {
-    resize: none;
-    border: 2px dashed pink;
-    outline: none;
-}
-.info {
-    height: 400px;
-    width: 100%;
-    background-color: white;
-    border: 2px dashed black
-    
-}
-
-h1 {
-    color:rgb(16, 163, 200);
-    text-align: center;
-    margin: 0
-}
-
-h4 {
-    text-align: center;
-    
-}
-
-</style>
