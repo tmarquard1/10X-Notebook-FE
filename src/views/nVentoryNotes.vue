@@ -36,32 +36,49 @@ export default {
             content: 'Enter Markdown Here...',
             notes: [],
             title: '',
-            notesData:{}
+            notesData:{},
+            fakeInitialData: {
+                id: 1,
+                title: 'My First Note',
+                content: "This is my first note. I'm going to use it to take notes on my first Vue app.",
+                tags:[
+                    {tag: 'nventory'},
+                ]
+            }
         }
     },
     methods: {
         getNotes() {
-            axios.get('http://localhost:9000/notes/')
+            /* axios.get('http://localhost:9000/notes/')
                 .then((response) => {
                     console.log(response.data)
                     this.notes = response.data
                 })
                 .catch((error) => {
                     console.log(error)
-                })
+                }) */
+                console.log(this.fakeInitialData);
+                this.notes.push( this.fakeInitialData);
+                console.log(this.notes);
         },
         create() {
             const data = {
+                // assigne a random id
+                id : Math.floor(Math.random() * 100) + 1,
                 title: this.title,
-                content: this.content
+                content: this.content,
+                tags: [
+                    {tag: 'nventory'},
+                ]
             };
-            axios.post('http://localhost:9000/note/add', data)
+            this.notes.push(data);
+            /* axios.post('http://localhost:9000/note/add', data)
                 .then(response => {
                     console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
-                });
+                }); */
         }
     },
     computed: {
