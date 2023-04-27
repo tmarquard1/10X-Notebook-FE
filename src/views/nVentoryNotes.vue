@@ -39,8 +39,8 @@ export default {
             notesData:{},
             fakeInitialData: {
                 id: 1,
-                title: 'My First Note',
-                content: "This is my first note. I'm going to use it to take notes on my first Vue app.",
+                title: 'My First nVentory Note',
+                content: "This is my first nventory note. I'm going to use it to take notes on my first Vue app.",
                 tags:[
                     {tag: 'nventory'},
                 ]

@@ -30,7 +30,7 @@
 import {marked} from 'marked';
 import axios from 'axios'
 export default {
-    name: 'nventory',
+    name: 'misc',
     data() {
         return {
             content: 'Enter Markdown Here...',
