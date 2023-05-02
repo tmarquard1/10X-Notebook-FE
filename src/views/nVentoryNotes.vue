@@ -60,10 +60,12 @@ export default {
                 console.log(this.fakeInitialData);
                 this.notes.push( this.fakeInitialData);
                 console.log(this.notes);
+                //Filter by tag
+
         },
         create() {
             const data = {
-                // assigne a random id
+                // assign a random id
                 id : Math.floor(Math.random() * 100) + 1,
                 title: this.title,
                 content: this.content,
@@ -72,13 +74,13 @@ export default {
                 ]
             };
             this.notes.push(data);
-            /* axios.post('http://localhost:9000/note/add', data)
+             axios.post('http://localhost:9000/note/add', data)
                 .then(response => {
                     console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
-                }); */
+                }); 
         }
     },
     computed: {
