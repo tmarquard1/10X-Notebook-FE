@@ -15,7 +15,12 @@
             <div v-html="markdownToHtml" class="info"></div>
         </div>
     </div>
-    <input v-model="tags" placeholder="Tags">
+    <input v-model="additional_tags" placeholder="Tags">
+    <ul class="tags">
+        <li v-for="tag in tags" :key="tag" class="tag">
+            {{ tag }}
+        </li>
+    </ul>
     <button @click="create">Save Note</button>
     <p>{{notesData}}</p>
     <button @click="getNotes">Load Notes</button>
@@ -23,6 +28,7 @@
       <h2>Note {{ note.id }}: {{ note.title }}</h2>
         <p></p>
         <h5>{{ note.content }}</h5>
+        <h6>{{ note.tags }}</h6>
     </div>
 </template>
 
@@ -116,11 +122,13 @@ export default {
                 content: this.content,
                 tags: [
                     {tag: 'nport'},
+                    {tag: this.additional_tags}
                 ]
             };
             this.notes.push(data);
             this.title = "";
             this.content = "";
+            this.additional_tags ="";
             /* axios.post('http://localhost:9000/note/add', data)
                 .then(response => {
                     console.log(response);
@@ -183,5 +191,21 @@ button {
   width: 100px;
   margin: 15 px;
 }
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+}
+.tag {
+  background: rgb(250, 104, 104);
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  white-space: nowrap;
+}
+
 
 </style>

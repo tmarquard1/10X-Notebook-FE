@@ -25,12 +25,11 @@
     </div>
 </template>
 
-
 <script>
 import {marked} from 'marked';
 import axios from 'axios'
 export default {
-    name: 'nventory',
+    name: 'nport',
     data() {
         return {
             content: 'Enter Markdown Here...',
@@ -39,12 +38,98 @@ export default {
             notesData:{},
             fakeInitialData: {
                 id: 1,
-                title: 'My First nVentory Note',
-                content: "This is my first nventory note. I'm going to use it to take notes on my first Vue app.",
+                title: 'My First nPort Note',
+                content: "This is my first nPort note. I'm going to use it to take notes on my first Vue app.",
                 tags:[
-                    {tag: 'nventory'},
+                    {tag: 'nport'},
                 ]
-            }
+            },
+            fakeInitialListofData:  // When the filter works, make this more challenging by having multiple tags per note. Including BOTH a nview and nport tag on one note. case sensitive
+            [
+                {
+                    id: 1,
+                    title: 'My First nPort Note and First xPort Note',
+                    content: "This is my first nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                        {tag: 'xport'}
+                    ]
+                },
+                {
+                    id: 2,
+                    title: 'My First nVuew Note and Second nPort',
+                    content: "This is my first nview note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nview'},
+                        {tag: 'nport'}
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'My Secnd nVuew Note',
+                    content: "This is my Second nview note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nview'},
+                    ]
+                },
+                {
+                    id: 4,
+                    title: 'My Third nPort Note',
+                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                    ]
+                },
+                                {
+                    id: 4,
+                    title: 'My Fourth nPort Note and first nventory',
+                    content: "I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                        {tag: 'nventory'}
+                    ]
+                },
+                                {
+                    id: 4,
+                    title: 'My Third nPort Note',
+                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                    ]
+                },
+                                {
+                    id: 4,
+                    title: 'My Third nPort Note',
+                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                    ]
+                },
+                                {
+                    id: 4,
+                    title: 'My Third nPort Note',
+                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                    ]
+                },
+                                {
+                    id: 4,
+                    title: 'My Third nPort Note',
+                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                    ]
+                },
+                                {
+                    id: 4,
+                    title: 'My Third nPort Note',
+                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
+                    tags:[
+                        {tag: 'nport'},
+                    ]
+                },
+            ]
         }
     },
     methods: {
@@ -57,15 +142,22 @@ export default {
                 .catch((error) => {
                     console.log(error)
                 }) */
-                console.log(this.fakeInitialData);
-                this.notes.push( this.fakeInitialData);
-                console.log(this.notes);
-                //Filter by tag
 
+                // Use fake initial list of data 
+                // The fake initial list of data needs to be filtered for the nport tag. 
+                // Then the filtered LIST needs to be applied to this.notes so that it is rendered on the screen 
+
+                // as part of this, fix the bug where data is loaded on top of old data. (unique data rendered)
+                //console.log(this.fakeInitialData);
+                //if(orig data)
+               
+                //this.notes.push(this.fakeInitialData);
+                this.notes = this.filteredNotes;
+                console.log(this.notes);
         },
         create() {
             const data = {
-                // assign a random id
+                // assigne a random id
                 id : Math.floor(Math.random() * 100) + 1,
                 title: this.title,
                 content: this.content,
@@ -74,19 +166,25 @@ export default {
                 ]
             };
             this.notes.push(data);
-             axios.post('http://localhost:9000/note/add', data)
+            this.title = "";
+            this.content = "";
+            /* axios.post('http://localhost:9000/note/add', data)
                 .then(response => {
                     console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
-                }); 
+                }); */
         }
     },
     computed: {
         markdownToHtml() {
-        return marked(this.content);
-        }
+            return marked(this.content);
+        },
+        filteredNotes(){
+            return this.fakeInitialListofData.filter((note) => note.tags.some((tag) => tag.tag === 'nventory')
+            );
+        },
     }
 
 }
