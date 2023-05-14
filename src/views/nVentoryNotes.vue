@@ -15,6 +15,7 @@
             <div v-html="markdownToHtml" class="info"></div>
         </div>
     </div>
+    <input v-model="additional_tags" placeholder="Tags">
     <button @click="create">Save Note</button>
     <p>{{notesData}}</p>
     <button @click="getNotes">Load Notes</button>
@@ -22,14 +23,16 @@
       <h2>Note {{ note.id }}: {{ note.title }}</h2>
         <p></p>
         <h5>{{ note.content }}</h5>
+        <h6>{{ note.tags }}</h6>
     </div>
 </template>
+
 
 <script>
 import {marked} from 'marked';
 import axios from 'axios'
 export default {
-    name: 'nport',
+    name: 'nventory',
     data() {
         return {
             content: 'Enter Markdown Here...',
@@ -48,7 +51,7 @@ export default {
             [
                 {
                     id: 1,
-                    title: 'My First nPort Note and First xPort Note',
+                    title: 'My First nPort Note',
                     content: "This is my first nPort note. I'm going to use it to take notes on my first Vue app.",
                     tags:[
                         {tag: 'nport'},
@@ -73,55 +76,6 @@ export default {
                     ]
                 },
                 {
-                    id: 4,
-                    title: 'My Third nPort Note',
-                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
-                    tags:[
-                        {tag: 'nport'},
-                    ]
-                },
-                                {
-                    id: 4,
-                    title: 'My Fourth nPort Note and first nventory',
-                    content: "I'm going to use it to take notes on my first Vue app.",
-                    tags:[
-                        {tag: 'nport'},
-                        {tag: 'nventory'}
-                    ]
-                },
-                                {
-                    id: 4,
-                    title: 'My Third nPort Note',
-                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
-                    tags:[
-                        {tag: 'nport'},
-                    ]
-                },
-                                {
-                    id: 4,
-                    title: 'My Third nPort Note',
-                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
-                    tags:[
-                        {tag: 'nport'},
-                    ]
-                },
-                                {
-                    id: 4,
-                    title: 'My Third nPort Note',
-                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
-                    tags:[
-                        {tag: 'nport'},
-                    ]
-                },
-                                {
-                    id: 4,
-                    title: 'My Third nPort Note',
-                    content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
-                    tags:[
-                        {tag: 'nport'},
-                    ]
-                },
-                                {
                     id: 4,
                     title: 'My Third nPort Note',
                     content: "This is my Secind nPort note. I'm going to use it to take notes on my first Vue app.",
@@ -163,11 +117,13 @@ export default {
                 content: this.content,
                 tags: [
                     {tag: 'nventory'},
+                    {tag: this.additional_tags}
                 ]
             };
             this.notes.push(data);
             this.title = "";
             this.content = "";
+            this.additional_tags ="";
             /* axios.post('http://localhost:9000/note/add', data)
                 .then(response => {
                     console.log(response);
@@ -230,5 +186,21 @@ button {
   width: 100px;
   margin: 15 px;
 }
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+}
+.tag {
+  background: rgb(250, 104, 104);
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  white-space: nowrap;
+}
+
 
 </style>

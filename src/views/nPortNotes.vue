@@ -16,11 +16,6 @@
         </div>
     </div>
     <input v-model="additional_tags" placeholder="Tags">
-    <ul class="tags">
-        <li v-for="tag in tags" :key="tag" class="tag">
-            {{ tag }}
-        </li>
-    </ul>
     <button @click="create">Save Note</button>
     <p>{{notesData}}</p>
     <button @click="getNotes">Load Notes</button>
